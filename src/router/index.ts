@@ -5,26 +5,39 @@ export const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('@/modulorum/landing/paginae/DomusPagina.vue'),
+      name: 'landing',
+      component: () => import('@/modulorum/landing/layout/LandingLayout.vue'),
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: () => import('@/modulorum/landing/paginae/DomusPagina.vue'),
+        },
+
+        {
+          path: '/features',
+          name: 'features',
+          component: () => import('@/modulorum/landing/paginae/PeculiaritatesPagina.vue'),
+        },
+
+        {
+          path: '/contact',
+          name: 'contact',
+          component: () => import('@/modulorum/landing/paginae/ContactusPagina.vue'),
+        },
+
+        {
+          path: '/pricing',
+          name: 'pricing',
+          component: () => import('@/modulorum/landing/paginae/PretiumPagina.vue'),
+        },
+      ],
     },
 
     {
-      path: '/features',
-      name: 'features',
-      component: () => import('@/modulorum/landing/paginae/PeculiaritatesPagina.vue'),
-    },
+      path: '/auth',
 
-    {
-      path: '/contact',
-      name: 'contact',
-      component: () => import('@/modulorum/landing/paginae/ContactusPagina.vue'),
-    },
-
-    {
-      path: '/pricing',
-      name: 'pricing',
-      component: () => import('@/modulorum/landing/paginae/PretiumPagina.vue'),
+      component: () => import('@/modulorum/auth/paginae/LoginPagina.vue'),
     },
   ],
 })
