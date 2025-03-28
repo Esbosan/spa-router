@@ -1,3 +1,4 @@
+import DomusPagina from '@/modulorum/landing/paginae/DomusPagina.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const router = createRouter({
@@ -11,7 +12,7 @@ export const router = createRouter({
         {
           path: '/',
           name: 'home',
-          component: () => import('@/modulorum/landing/paginae/DomusPagina.vue'),
+          component: DomusPagina,
         },
 
         {
@@ -27,6 +28,16 @@ export const router = createRouter({
         },
 
         {
+          path: '/pokemon/:id',
+          name: 'pokemon',
+          props: (route) => {
+            const id = Number(route.params.id)
+            return isNaN(id) ? { id: 1 } : { id }
+          },
+          component: () => import('@/modulorum/pokemons/paginae/PokemonPagina.vue'),
+        },
+
+        {
           path: '/pricing',
           name: 'pricing',
           component: () => import('@/modulorum/landing/paginae/PretiumPagina.vue'),
@@ -37,7 +48,27 @@ export const router = createRouter({
     {
       path: '/auth',
 
-      component: () => import('@/modulorum/auth/paginae/LoginPagina.vue'),
+      component: () => import('@/modulorum/auth/layouts/AuthLayout.vue'),
+      redirect: { name: 'login' },
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: () => import('@/modulorum/auth/paginae/LoginPagina.vue'),
+        },
+
+        {
+          path: '/register',
+          name: 'register',
+          component: () => import('@/modulorum/auth/paginae/RegisterPagina.vue'),
+        },
+      ],
+    },
+
+    {
+      path: '/:pathMatch(.*)*',
+      // redirect: '/'
+      component: () => import('@/modulorum/ordinarius/paginae/NotFound404.vue'),
     },
   ],
 })
