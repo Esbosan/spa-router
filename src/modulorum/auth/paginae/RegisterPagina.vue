@@ -29,6 +29,10 @@
       <label for="remember" class="text-gray-600 ml-2">Remember Me</label>
     </div>
 
+    <div class="mb-6 text-blue-500">
+      <a href="#" class="hover:underline">Forgot Password?</a>
+    </div>
+
     <button
       type="button"
       class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"

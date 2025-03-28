@@ -28,6 +28,16 @@ export const router = createRouter({
         },
 
         {
+          path: '/pokemon/:id',
+          name: 'pokemon',
+          props: (route) => {
+            const id = Number(route.params.id)
+            return isNaN(id) ? { id: 1 } : { id }
+          },
+          component: () => import('@/modulorum/pokemons/paginae/PokemonPagina.vue'),
+        },
+
+        {
           path: '/pricing',
           name: 'pricing',
           component: () => import('@/modulorum/landing/paginae/PretiumPagina.vue'),
@@ -39,7 +49,7 @@ export const router = createRouter({
       path: '/auth',
 
       component: () => import('@/modulorum/auth/layouts/AuthLayout.vue'),
-      redirect: {name: 'login'},
+      redirect: { name: 'login' },
       children: [
         {
           path: '/login',
@@ -50,10 +60,15 @@ export const router = createRouter({
         {
           path: '/register',
           name: 'register',
-          component: () => import('@/modulorum/auth/paginae/RegisterPagina.vue')
+          component: () => import('@/modulorum/auth/paginae/RegisterPagina.vue'),
         },
-
       ],
+    },
+
+    {
+      path: '/:pathMatch(.*)*',
+      // redirect: '/'
+      component: () => import('@/modulorum/ordinarius/paginae/NotFound404.vue'),
     },
   ],
 })
