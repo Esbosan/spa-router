@@ -1,3 +1,4 @@
+import DomusPagina from '@/modulorum/landing/paginae/DomusPagina.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const router = createRouter({
@@ -11,7 +12,7 @@ export const router = createRouter({
         {
           path: '/',
           name: 'home',
-          component: () => import('@/modulorum/landing/paginae/DomusPagina.vue'),
+          component: DomusPagina,
         },
 
         {
@@ -37,7 +38,22 @@ export const router = createRouter({
     {
       path: '/auth',
 
-      component: () => import('@/modulorum/auth/paginae/LoginPagina.vue'),
+      component: () => import('@/modulorum/auth/layouts/AuthLayout.vue'),
+      redirect: {name: 'login'},
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: () => import('@/modulorum/auth/paginae/LoginPagina.vue'),
+        },
+
+        {
+          path: '/register',
+          name: 'register',
+          component: () => import('@/modulorum/auth/paginae/RegisterPagina.vue')
+        },
+
+      ],
     },
   ],
 })
